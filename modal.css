@@ -1,0 +1,134 @@
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(2, 61, 43, 0.8);
+    /* Dark green overlay for Darul Ifta theme */
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: var(--clr-surface);
+    margin: 5% auto;
+    padding: 30px;
+    border: 1px solid var(--clr-emerald-100);
+    box-shadow: var(--shadow-lg);
+    width: 90%;
+    max-width: 600px;
+    border-radius: 12px;
+    position: relative;
+    animation: modalScaleIn 0.3s ease-out;
+}
+
+@keyframes modalScaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-modal {
+    color: var(--clr-text-muted);
+    float: left;
+    /* RTL support */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+    color: var(--clr-primary);
+    text-decoration: none;
+}
+
+.modal-title {
+    color: var(--clr-primary-dark);
+    margin-bottom: 5px;
+    font-size: 1.8rem;
+    font-family: var(--font-nastaliq-kasheeda);
+}
+
+/* Form Styles */
+.fatwa-form .form-group {
+    margin-bottom: 20px;
+}
+
+.fatwa-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--clr-text-main);
+    font-weight: 500;
+}
+
+.fatwa-form .required {
+    color: #ef4444;
+}
+
+.fatwa-form input,
+.fatwa-form select,
+.fatwa-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: 1px solid var(--clr-border);
+    background-color: var(--clr-bg);
+    color: var(--clr-text-main);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.fatwa-form input:focus,
+.fatwa-form select:focus,
+.fatwa-form textarea:focus {
+    outline: none;
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 0 3px rgba(4, 99, 70, 0.1);
+}
+
+.fatwa-form select option {
+    background-color: var(--clr-surface);
+    color: var(--clr-text-main);
+}
+
+.btn-full {
+    width: 100%;
+    justify-content: center;
+    font-size: 1.1rem;
+    padding: 14px;
+}
+
+.form-message {
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: none;
+    text-align: center;
+}
+
+.form-message.success {
+    display: block;
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid #10b981;
+    color: #10b981;
+}
+
+.form-message.error {
+    display: block;
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid #ef4444;
+    color: #ef4444;
+}

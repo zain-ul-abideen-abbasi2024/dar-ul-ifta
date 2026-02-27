@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دار الافتاء | Darul Ifta</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+
+<body>
+    <div class="pattern-bg"></div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="logo.png" alt="دار الافتاء" class="logo-img">
+            </div>
+
+            <div class="search-container">
+                <i class="ri-search-line search-icon"></i>
+                <input type="text" class="search-bar" id="searchInput"
+                    placeholder="فتاویٰ مسائل یا مفتیان کرام تلاش کریں" dir="auto" autocomplete="off">
+                <div class="search-results-dropdown" id="searchResults"></div>
+            </div>
+
+            <div class="header-actions">
+                <button class="btn btn-gold open-modal-btn" id="header-ask-btn">
+                    <i class="ri-quill-pen-line"></i>
+                    نیا فتویٰ پوچھیں
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="badge notranslate" translate="no" dir="rtl">بسم اللہ الرحمن الرحیم</span>
+                    <h2 class="hero-ayat notranslate" translate="no" lang="ar" dir="rtl">فَسۡـــَٔلُوۡۤا اَهۡلَ
+                        الذِّكۡرِ اِنۡ كُنۡتُمۡ لَا تَعۡلَمُوۡنَۙ <span class="ayat-ref">النحل (43)</span></h2>
+                    <p class="hero-translation" dir="rtl">ترجمہ: سو اگر تم کو علم نہیں ہے تو علم والوں سے پوچھ لو</p>
+                    <img src="darul-ifta-fatwa-desk.png" alt="Islamic Scholar's Desk representing Darul Ifta"
+                        class="hero-image-display">
+                    <h1 class="hero-title">قرآن و سنت کی روشنی میں <br> آپ کے مسائل کا حل</h1>
+                    <p class="hero-subtitle">مستند علمائے کرام اور مفتیانِ عظام کی زیرِ نگرانی آن لائن فتاویٰ سروس۔ اپنی
+                        زندگی کے ہر پہلو میں شریعت کی رہنمائی حاصل کریں۔</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-gold btn-large open-modal-btn" id="hero-ask-btn">سوال بھیجیں</button>
+                        <a href="recent-fatwas.html" class="btn btn-outline btn-large">تازہ ترین فتاویٰ</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fiqh Chapters (Categories) -->
+        <section class="section fiqh-chapters" id="fiqh-chapters">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">ابوابِ فقہ</h2>
+                    <p class="section-desc">مختلف موضوعات کے تحت فتاویٰ تلاش کریں</p>
+                </div>
+                <div class="grid categories-grid">
+                    <!-- Category Cards Generated via JS/HTML -->
+                    <div class="category-card" style="--animation-order: 1"
+                        onclick="window.location.href='chapters.html'">
+                        <div class="icon-wrapper"><i class="ri-book-open-line"></i></div>
+                        <h3>ایمان و عقائد</h3>
+                        <p>۳۱۲ فتاویٰ</p>
+                    </div>
+                    <div class="category-card" style="--animation-order: 2"
+                        onclick="window.location.href='chapters.html'">
+                        <div class="icon-wrapper"><i class="ri-water-flash-line"></i></div>
+                        <h3>طہارت و پاکی</h3>
+                        <p>۴۵۰ فتاویٰ</p>
+                    </div>
+                    <div class="category-card" style="--animation-order: 3"
+                        onclick="window.location.href='chapters.html'">
+                        <div class="icon-wrapper"><i class="ri-moon-clear-line"></i></div>
+                        <h3>نماز و عبادات</h3>
+                        <p>۸۹۰ فتاویٰ</p>
+                    </div>
+                    <div class="category-card" style="--animation-order: 4"
+                        onclick="window.location.href='chapters.html'">
+                        <div class="icon-wrapper"><i class="ri-hand-coin-line"></i></div>
+                        <h3>زکوٰۃ و صدقات</h3>
+                        <p>۲۳۰ فتاویٰ</p>
+                    </div>
+                    <div class="category-card" style="--animation-order: 5"
+                        onclick="window.location.href='chapters.html'">
+                        <div class="icon-wrapper"><i class="ri-restaurant-line"></i></div>
+                        <h3>حلال و حرام</h3>
+                        <p>۱۸۵ فتاویٰ</p>
+                    </div>
+                    <div class="category-card" style="--animation-order: 6"
+                        onclick="window.location.href='chapters.html'">
+                        <div class="icon-wrapper"><i class="ri-bar-chart-box-line"></i></div>
+                        <h3>تجارت و معیشت</h3>
+                        <p>۵۴۰ فتاویٰ</p>
+                    </div>
+                </div>
+                <div class="center-btn">
+                    <a href="chapters.html" class="btn btn-outline" style="margin-top: 2rem; display: inline-flex;">تمام
+                        فقہی ابواب دیکھیں</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Fatwas Section -->
+        <section class="section recent-fatwas" id="recent-fatwas">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">حالیہ فتاویٰ جات</h2>
+                    <p class="section-desc">عوام الناس کے پوچھے گئے تازہ ترین سوالات اور ان کے جوابات</p>
+                </div>
+                <div class="grid fatwa-grid">
+                    <div class="fatwa-card" style="cursor: pointer;" onclick="window.location.href='fatwa-detail.html'">
+                        <div class="fatwa-meta">
+                            <span class="fatwa-category">تجارت و معیشت</span>
+                            <span class="fatwa-date">۱۲ رجب ۱۴۴۷ھ</span>
+                        </div>
+                        <h3 class="fatwa-question">ڈیجیٹل کرنسی (کرپٹو) میں سرمایہ کاری کا شرعی حکم کیا ہے؟</h3>
+                        <p class="fatwa-snippet">جدید دور میں کرپٹو کرنسی کی خرید و فروخت کے حوالے سے علمائے کرام کی
+                            آراء اور شرعی اصولوں کی روشنی میں تفصیلی جائزہ...</p>
+                        <div class="fatwa-footer">
+                            <div class="mufti-info">
+                                <div class="mufti-avatar">م</div>
+                                <span class="mufti-name">مفتی محمد احمد</span>
+                            </div>
+                            <a href="fatwa-detail.html" class="read-more">تفصیل پڑھیں <i
+                                    class="ri-arrow-left-line"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="fatwa-card" style="cursor: pointer;" onclick="window.location.href='fatwa-detail.html'">
+                        <div class="fatwa-meta">
+                            <span class="fatwa-category">نماز</span>
+                            <span class="fatwa-date">۱۱ رجب ۱۴۴۷ھ</span>
+                        </div>
+                        <h3 class="fatwa-question">ٹرین یا ہوائی جہاز میں نماز ادا کرنے کا کیا طریقہ ہے؟</h3>
+                        <p class="fatwa-snippet">دوران سفر سواری کے اندر نماز فرض ادا کرنے کی شرائط، قیام اور قبلہ رخ
+                            ہونے کے حوالے سے تفصیلی شرعی احکام...</p>
+                        <div class="fatwa-footer">
+                            <div class="mufti-info">
+                                <div class="mufti-avatar">ع</div>
+                                <span class="mufti-name">مفتی عبداللہ</span>
+                            </div>
+                            <a href="fatwa-detail.html" class="read-more">تفصیل پڑھیں <i
+                                    class="ri-arrow-left-line"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="fatwa-card" style="cursor: pointer;" onclick="window.location.href='fatwa-detail.html'">
+                        <div class="fatwa-meta">
+                            <span class="fatwa-category">زکوٰۃ</span>
+                            <span class="fatwa-date">۱۰ رجب ۱۴۴۷ھ</span>
+                        </div>
+                        <h3 class="fatwa-question">پلاٹ یا پراپرٹی پر زکوٰۃ کی کٹوتی کے اصول کیا ہیں؟</h3>
+                        <p class="fatwa-snippet">وہ زمین یا پراپرٹی جو ذاتی استعمال کے لیے ہو یا تجارت کی نیت سے خریدی
+                            گئی ہو، اس پر زکوٰۃ کی فرضیت کے اصول...</p>
+                        <div class="fatwa-footer">
+                            <div class="mufti-info">
+                                <div class="mufti-avatar">ا</div>
+                                <span class="mufti-name">مفتی ابراہیم قاسمی</span>
+                            </div>
+                            <a href="fatwa-detail.html" class="read-more">تفصیل پڑھیں <i
+                                    class="ri-arrow-left-line"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="center-btn">
+                    <a href="recent-fatwas.html" class="btn btn-outline"
+                        style="margin-top: 2rem; display: inline-flex;">مزید فتاویٰ دیکھیں</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mufti Profiles Section -->
+        <section class="section muftis-section" id="muftis">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">پینل آف مفتیانِ عظام</h2>
+                    <p class="section-desc">مستند اور جید علمائے کرام جن کی نگرانی میں فتاویٰ جاری کیے جاتے ہیں</p>
+                </div>
+                <div class="grid mufti-grid">
+                    <div class="mufti-card" style="cursor: pointer;"
+                        onclick="window.location.href='mufti-profile.html'">
+                        <div class="mufti-image-wrapper">
+                            <div class="mufti-placeholder-img">
+                                <i class="ri-file-user-line"></i>
+                            </div>
+                            <div class="glow-effect"></div>
+                        </div>
+                        <h3 class="mufti-title">مفتی محمد احمد صاحب</h3>
+                        <p class="mufti-designation">رئیس دار الافتاء</p>
+                        <p class="mufti-specialty">تخصص فی الفقہ الاسلامی، تخصص فی الحدیث</p>
+                    </div>
+
+                    <div class="mufti-card" style="cursor: pointer;"
+                        onclick="window.location.href='mufti-profile.html'">
+                        <div class="mufti-image-wrapper">
+                            <div class="mufti-placeholder-img">
+                                <i class="ri-file-user-line"></i>
+                            </div>
+                            <div class="glow-effect"></div>
+                        </div>
+                        <h3 class="mufti-title">مفتی عبداللہ صاحب</h3>
+                        <p class="mufti-designation">نائب مفتی اعظم</p>
+                        <p class="mufti-specialty">ماہر اسلامی معاشیات و اقتصادیات</p>
+                    </div>
+
+                    <div class="mufti-card" style="cursor: pointer;"
+                        onclick="window.location.href='mufti-profile.html'">
+                        <div class="mufti-image-wrapper">
+                            <div class="mufti-placeholder-img">
+                                <i class="ri-file-user-line"></i>
+                            </div>
+                            <div class="glow-effect"></div>
+                        </div>
+                        <h3 class="mufti-title">مفتی ابراہیم قاسمی</h3>
+                        <p class="mufti-designation">محقق و مفتی</p>
+                        <p class="mufti-specialty">تخصص فی ابواب المیراث و النکاح</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-text">دار الافتاء</span>
+                    </div>
+                    <p class="footer-desc">قرآن و سنت کی روشنی میں آپ کے شرعی مسائل کا مستند حل۔ ہماری کوشش ہے کہ ہر
+                        سائل تک صحیح شرعی رہنمائی پہنچائی جائے۔</p>
+                    <div class="social-links">
+                        <a href="#"><i class="ri-facebook-circle-fill"></i></a>
+                        <a href="#"><i class="ri-twitter-x-line"></i></a>
+                        <a href="#"><i class="ri-youtube-fill"></i></a>
+                        <a href="#"><i class="ri-instagram-line"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>اہم روابط</h3>
+                    <ul>
+                        <li><a href="recent-fatwas.html">تازہ ترین فتاویٰ</a></li>
+                        <li><a href="chapters.html">ابوابِ فقہ</a></li>
+                        <li><a href="#" class="open-modal-btn">سوال پوچھیں</a></li>
+                        <li><a href="about.html">ہمارے بارے میں</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>رابطہ کریں</h3>
+                    <ul class="contact-info">
+                        <li><i class="ri-map-pin-line"></i> جامعہ مسجد، مین روڈ، شہر</li>
+                        <li><i class="ri-phone-line"></i> +92 300 1234567</li>
+                        <li><i class="ri-mail-line"></i> info@darulifta.example.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><span
+                        style="font-family: var(--font-nastaliq-kasheeda, 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu'); font-size: 1.2em; color: var(--clr-gold);">&copy;
+                        2026 دار الافتاء. جملہ حقوق محفوظ ہیں۔ ڈیویلپر: زین العابدین عباسی</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Ask Fatwa Modal -->
+    <div id="fatwaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">نیا فتویٰ پوچھیں</h2>
+            <p style="margin-bottom: 20px; color: var(--clr-text-muted); font-size: 0.95rem;">سوال بھیجنے سے پہلے متعلقہ
+                فقہی باب میں تلاش ضرور کرلیں۔ جواب ای میل کے ذریعے دیا جائے گا۔</p>
+
+            <form id="fatwaForm" class="fatwa-form">
+                <div class="form-group">
+                    <label for="name">پورا نام <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="اپنا نام درج کریں">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">ای میل ایڈریس <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">فون نمبر (اختیاری)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="0300 0000000">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">فقہی باب <span class="required">*</span></label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>منتخب کریں...</option>
+                        <option value="ایمان و عقائد">ایمان و عقائد</option>
+                        <option value="طہارت و پاکی">طہارت و پاکی</option>
+                        <option value="نماز و عبادات">نماز و عبادات</option>
+                        <option value="زکوٰۃ و صدقات">زکوٰۃ و صدقات</option>
+                        <option value="حلال و حرام">حلال و حرام</option>
+                        <option value="تجارت و معیشت">تجارت و معیشت</option>
+                        <option value="دیگر">دیگر مسائل</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="question">اپنا سوال تفصیل سے لکھیں <span class="required">*</span></label>
+                    <textarea id="question" name="question" required rows="5"
+                        placeholder="اپنا سوال الواضح اردو رسم الخط میں درج کریں۔۔۔"></textarea>
+                </div>
+
+                <div id="formMessage" class="form-message"></div>
+
+                <button type="submit" class="btn btn-gold btn-full">سوال جمع کرائیں <i
+                        class="ri-send-plane-fill"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
