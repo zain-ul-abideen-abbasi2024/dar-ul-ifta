@@ -245,15 +245,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok) {
-                    formMessage.className = 'form-message success';
-                    formMessage.textContent = result.message;
                     fatwaForm.reset();
+                    modal.style.display = 'none'; // Close question modal
 
-                    // Close modal after 3 seconds on success
-                    setTimeout(() => {
-                        modal.style.display = 'none';
-                        formMessage.style.display = 'none';
-                    }, 3000);
+                    // Show success modal
+                    const successModal = document.getElementById('successModal');
+                    if (successModal) {
+                        successModal.style.display = 'flex';
+                    }
                 } else {
                     formMessage.className = 'form-message error';
                     formMessage.textContent = result.message || 'Error occurred';
@@ -266,6 +265,22 @@ document.addEventListener('DOMContentLoaded', () => {
             } finally {
                 submitBtn.innerHTML = originalBtnText;
                 submitBtn.disabled = false;
+            }
+        });
+    }
+
+    // Close Success Modal Logic
+    const successModal = document.getElementById('successModal');
+    const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+
+    if (successModal && closeSuccessBtn) {
+        closeSuccessBtn.addEventListener('click', () => {
+            successModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == successModal) {
+                successModal.style.display = 'none';
             }
         });
     }

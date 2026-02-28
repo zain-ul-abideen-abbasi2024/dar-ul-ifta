@@ -26,6 +26,12 @@
     animation: modalScaleIn 0.3s ease-out;
 }
 
+.success-modal-content {
+    max-width: 500px;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
 @keyframes modalScaleIn {
     from {
         transform: scale(0.9);
