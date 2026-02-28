@@ -977,4 +977,13 @@ h4,
     .hero-buttons {
         width: 100%;
     }
+
+    .search-bar {
+        padding-inline-end: 2.5rem;
+        padding-inline-start: 1rem;
+        font-size: 0.85rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
 }
