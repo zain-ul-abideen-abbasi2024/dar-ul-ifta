@@ -180,9 +180,8 @@ h4,
 .search-bar {
     width: 100%;
     padding: 0.8rem;
-    padding-inline-end: 6rem;
-    /* Even more padding to absolutely ensure no overlap with the icon */
-    padding-inline-start: 2rem;
+    padding-inline-end: 2.8rem;
+    padding-inline-start: 2.8rem;
     border-radius: 9999px;
     border: 1px solid var(--clr-border);
     background: var(--clr-bg);
@@ -980,7 +979,7 @@ h4,
 
     .search-bar {
         padding-inline-end: 2.5rem;
-        padding-inline-start: 1rem;
+        padding-inline-start: 2.5rem;
         font-size: 0.85rem;
         text-overflow: ellipsis;
         white-space: nowrap;
