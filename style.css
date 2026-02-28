@@ -928,4 +928,53 @@ h4,
     .contact-info li {
         justify-content: center;
     }
+
+    .hero-image-display {
+        height: 250px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero {
+        padding: 4rem 1rem;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .hero-ayat {
+        font-size: 1.25rem;
+    }
+
+    .hero-translation {
+        font-size: 1.1rem;
+    }
+
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .fatwa-grid,
+    .categories-grid,
+    .mufti-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .fatwa-card {
+        padding: 1.5rem;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-buttons {
+        width: 100%;
+    }
 }
