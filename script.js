@@ -162,11 +162,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. Fix Search Bar Direction for Automatic Browser Translation
+    // 6. Fix Search Bar Direction for Automatic Browser Translation and Clear Icon
     const htmlLangAttrBase = document.documentElement.lang;
     const searchInput = document.querySelector('.search-bar');
+    const searchClear = document.getElementById('searchClear');
 
     if (searchInput) {
+        // Search clear icon logic
+        if (searchClear) {
+            searchInput.addEventListener('input', function () {
+                if (this.value.length > 0) {
+                    searchClear.style.display = 'block';
+                } else {
+                    searchClear.style.display = 'none';
+                }
+            });
+
+            searchClear.addEventListener('click', function () {
+                searchInput.value = '';
+                searchClear.style.display = 'none';
+                searchInput.focus();
+            });
+        }
+
         // Observer to detect when Google Translate modifies the HTML tag
         const mutationObserver = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
@@ -284,4 +302,37 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Scroll to Top Button Logic
+    const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                scrollToTopBtn.style.display = 'flex';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            // Smooth scroll to top
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add subtle hover animation for scroll button
+        scrollToTopBtn.addEventListener('mouseenter', () => {
+            scrollToTopBtn.style.transform = 'translateY(-5px)';
+            scrollToTopBtn.style.backgroundColor = 'var(--clr-primary)';
+        });
+
+        scrollToTopBtn.addEventListener('mouseleave', () => {
+            scrollToTopBtn.style.transform = 'translateY(0)';
+            scrollToTopBtn.style.backgroundColor = 'var(--clr-gold)';
+        });
+    }
+
 });

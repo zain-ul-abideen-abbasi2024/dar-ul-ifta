@@ -30,6 +30,8 @@
                 <i class="ri-search-line search-icon"></i>
                 <input type="text" class="search-bar" id="searchInput"
                     placeholder="فتاویٰ مسائل یا مفتیان کرام تلاش کریں" dir="auto" autocomplete="off">
+                <i class="ri-close-line search-clear" id="searchClear"
+                    style="display: none; position: absolute; left: 1.5rem; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--clr-text-muted); font-size: 1.2rem;"></i>
                 <div class="search-results-dropdown" id="searchResults"></div>
             </div>
 
@@ -249,10 +251,18 @@
                     <p class="footer-desc">قرآن و سنت کی روشنی میں آپ کے شرعی مسائل کا مستند حل۔ ہماری کوشش ہے کہ ہر
                         سائل تک صحیح شرعی رہنمائی پہنچائی جائے۔</p>
                     <div class="social-links">
-                        <a href="#"><i class="ri-facebook-circle-fill"></i></a>
-                        <a href="#"><i class="ri-twitter-x-line"></i></a>
-                        <a href="#"><i class="ri-youtube-fill"></i></a>
-                        <a href="#"><i class="ri-instagram-line"></i></a>
+                        <a href="javascript:void(0)"
+                            onclick="alert('یہ صفحہ ابھی زیرِ تعمیر ہے۔ جلد ہی دارالافتاء کے سوشل میڈیا لنکس فراہم کر دیے جائیں گے۔')"><i
+                                class="ri-facebook-circle-fill"></i></a>
+                        <a href="javascript:void(0)"
+                            onclick="alert('یہ صفحہ ابھی زیرِ تعمیر ہے۔ جلد ہی دارالافتاء کے سوشل میڈیا لنکس فراہم کر دیے جائیں گے۔')"><i
+                                class="ri-twitter-x-line"></i></a>
+                        <a href="javascript:void(0)"
+                            onclick="alert('یہ صفحہ ابھی زیرِ تعمیر ہے۔ جلد ہی دارالافتاء کے سوشل میڈیا لنکس فراہم کر دیے جائیں گے۔')"><i
+                                class="ri-youtube-fill"></i></a>
+                        <a href="javascript:void(0)"
+                            onclick="alert('یہ صفحہ ابھی زیرِ تعمیر ہے۔ جلد ہی دارالافتاء کے سوشل میڈیا لنکس فراہم کر دیے جائیں گے۔')"><i
+                                class="ri-instagram-line"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
@@ -353,6 +363,11 @@
             <button class="btn btn-primary" id="closeSuccessBtn" style="min-width: 150px;">شکریہ</button>
         </div>
     </div>
+
+    <button id="scrollToTopBtn" title="اوپر جائیں"
+        style="display: none; position: fixed; bottom: 20px; right: 20px; z-index: 99; border: none; outline: none; background-color: var(--clr-gold); color: white; cursor: pointer; padding: 15px; border-radius: 50%; font-size: 1.5rem; box-shadow: var(--shadow-md); transition: background-color 0.3s, transform 0.3s; width: 50px; height: 50px; align-items: center; justify-content: center;">
+        <i class="ri-arrow-up-line"></i>
+    </button>
 
     <script src="script.js"></script>
 </body>
