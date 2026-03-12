@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وراثت کا نقشہ - جامعہ دارالافتاء</title>
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+    <style>
+        .inheritance-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .inheritance-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .heir-form-container {
+            background: var(--clr-surface);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--clr-border);
+        }
+
+        .heir-group {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--clr-border);
+        }
+
+        .heir-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .heir-group h3 {
+            font-size: 1.3rem;
+            color: var(--clr-primary-dark);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--clr-text-main);
+            font-weight: 500;
+        }
+
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--clr-border);
+            border-radius: 8px;
+            font-family: var(--font-nastaliq);
+            font-size: 1.1rem;
+            background: var(--clr-bg);
+            transition: var(--transition);
+        }
+
+        .form-group select:focus,
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--clr-primary);
+            box-shadow: 0 0 0 3px rgba(4, 99, 70, 0.1);
+        }
+
+        .tree-container {
+            background: var(--clr-surface);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--clr-border);
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tree-placeholder {
+            text-align: center;
+            color: var(--clr-text-muted);
+        }
+
+        .tree-placeholder i {
+            font-size: 4rem;
+            color: var(--clr-emerald-200);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .tree-placeholder p {
+            font-size: 1.2rem;
+        }
+
+        /* SVG and Tree Generation Styles */
+        .visual-tree {
+            width: 100%;
+            height: 100%;
+        }
+
+        .node-box {
+            background: white;
+            border: 2px solid var(--clr-primary);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            width: 140px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .node-title {
+            font-weight: 600;
+            color: var(--clr-primary-dark);
+            font-size: 1.2rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .node-share {
+            background: var(--clr-emerald-100);
+            color: var(--clr-primary);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        .node-amount {
+            color: var(--clr-gold-dark);
+            font-size: 1rem;
+            margin-top: 0.25rem;
+        }
+
+        .deceased-node {
+            border-color: var(--clr-gold);
+            background: var(--clr-gold-50);
+        }
+
+        .deceased-node .node-share {
+            display: none;
+        }
+
+        @keyframes popIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .tree-line {
+            stroke: var(--clr-border);
+            stroke-width: 2px;
+            fill: none;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawLine 1s ease forwards;
+        }
+
+        @keyframes drawLine {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="container top-nav-container">
+            <div class="contact-info-top">
+                <a href="mailto:info@darulifta.com"><i class="ri-mail-send-line"></i> info@darulifta.com</a>
+                <a href="tel:+923001234567"><i class="ri-phone-line"></i> 0300 1234567</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="ri-facebook-circle-fill"></i></a>
+                <a href="#"><i class="ri-twitter-x-line"></i></a>
+                <a href="#"><i class="ri-youtube-fill"></i></a>
+                <a href="#"><i class="ri-whatsapp-line"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="دار الافتاء" class="logo-img">
+                </a>
+            </div>
+
+            <!-- Global Search Bar Placeholder -->
+            <div class="search-container" style="visibility: hidden;">
+                 <input type="text" class="search-bar">
+            </div>
+
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-outline">
+                    <i class="ri-home-4-line"></i> ہوم پیج
+                </a>
+                <button class="btn btn-gold open-modal-btn" id="header-ask-btn">
+                    <i class="ri-quill-pen-line"></i> نیا فتویٰ پوچھیں
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <div class="main-nav-wrapper">
+        <div class="container">
+            <ul class="main-nav">
+                <li><a href="recent-fatwas.html">تازہ ترین فتاویٰ</a></li>
+                <li><a href="categories.html">ابوابِ فقہ</a></li>
+                <li><a href="muftian.html">مفتیانِ کرام</a></li>
+                <li><a href="inheritance.html" class="active">وراثت کا نقشہ (Visual Tool)</a></li>
+                <li><a href="about.html">تعارف</a></li>
+                <li><a href="contact.html">رابطہ کریں</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="section" style="background-color: var(--clr-bg);">
+            <div class="container">
+                <div class="section-header text-center" style="margin-bottom: 3rem;">
+                    <h1 class="section-title">بصری وراثت کا نقشہ (Visual Inheritance Tree)</h1>
+                    <p style="color: var(--clr-text-muted); font-size: 1.2rem; max-width: 600px; margin: 1rem auto;">
+                        متوفی کے ورثاء کی تفصیلات درج کریں اور جانیے شرعی اصولوں کے مطابق ہر حق دار کا کتنا حصہ اور مال بنتا ہے، ایک خوبصورت متحرک نقشے کی صورت میں۔
+                    </p>
+                </div>
+
+                <div class="inheritance-container">
+                    <!-- Input Form -->
+                    <div class="heir-form-container">
+                        <form id="inheritanceForm">
+                            
+                            <div class="heir-group">
+                                <h3><i class="ri-user-star-line"></i> متوفی کی تفصیلات</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>جنس (Gender)</label>
+                                        <select id="deceasedGender">
+                                            <option value="male">مرد</option>
+                                            <option value="female">عورت</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>کل مالیت (روپے میں) - اختیاری</label>
+                                        <input type="number" id="totalWealth" placeholder="مثلاً 1000000" min="0">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="heir-group">
+                                <h3><i class="ri-parent-line"></i> والدین</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>والد</label>
+                                        <select id="fatherAlive">
+                                            <option value="0">حیات نہیں</option>
+                                            <option value="1">حیات ہیں</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>والدہ</label>
+                                        <select id="motherAlive">
+                                            <option value="0">حیات نہیں</option>
+                                            <option value="1">حیات ہیں</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="heir-group" id="spouseGroup">
+                                <h3><i class="ri-heart-3-line"></i> شریکِ حیات</h3>
+                                <div class="form-group" id="wifeInput" style="display: block;">
+                                    <label>بیوگان کی تعداد</label>
+                                    <select id="wivesCount">
+                                        <option value="0">کوئی نہیں</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="husbandInput" style="display: none;">
+                                    <label>شوہر</label>
+                                    <select id="husbandAlive">
+                                        <option value="0">حیات نہیں</option>
+                                        <option value="1">حیات ہیں</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="heir-group">
+                                <h3><i class="ri-group-line"></i> اولاد</h3>
+                                <div class="form-grid">
+                                    <div class="form-group">
+                                        <label>بیٹوں کی تعداد</label>
+                                        <input type="number" id="sonsCount" value="0" min="0" max="20">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>بیٹیوں کی تعداد</label>
+                                        <input type="number" id="daughtersCount" value="0" min="0" max="20">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn btn-gold btn-full" id="calculateInheritanceBtn" style="font-size: 1.3rem;">
+                                نقشہ بنائیے <i class="ri-magic-line"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Visual Tree Output -->
+                    <div class="tree-container" id="treeCanvas">
+                        <div class="tree-placeholder" id="treePlaceholder">
+                            <i class="ri-node-tree"></i>
+                            <p>ورثاء کی تفصیلات درج کر کے "نقشہ بنائیے" پر کلک کریں</p>
+                        </div>
+                        <!-- SVG and exact nodes will be injected here via JS -->
+                        <div id="visualGraph" style="width: 100%; height: 100%; position: absolute; inset: 0; pointer-events: none;">
+                            <svg id="treeLines" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;"></svg>
+                            <div id="treeNodes" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: auto;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-text">دار الافتاء</span>
+                    </div>
+                    <p class="footer-desc">قرآن و سنت کی روشنی میں آپ کے شرعی مسائل کا مستند حل۔ ہماری کوشش ہے کہ ہر سائل تک صحیح شرعی رہنمائی پہنچائی جائے۔</p>
+                    <div class="social-links">
+                        <a href="javascript:void(0)" onclick="alert('یہ صفحہ ابھی زیرِ تعمیر ہے۔ جلد ہی دارالافتاء کے سوشل میڈیا لنکس فراہم کر دیے جائیں گے۔')"><i class="ri-facebook-circle-fill"></i></a>
+                        <a href="javascript:void(0)" onclick="alert('یہ صفحہ ابھی زیرِ تعمیر ہے۔ جلد ہی دارالافتاء کے سوشل میڈیا لنکس فراہم کر دیے جائیں گے۔')"><i class="ri-twitter-x-line"></i></a>
+                        <a href="javascript:void(0)" onclick="alert('یہ صفحہ ابھی زیرِ تعمیر ہے۔ جلد ہی دارالافتاء کے سوشل میڈیا لنکس فراہم کر دیے جائیں گے۔')"><i class="ri-youtube-fill"></i></a>
+                        <a href="javascript:void(0)" onclick="alert('یہ صفحہ ابھی زیرِ تعمیر ہے۔ جلد ہی دارالافتاء کے سوشل میڈیا لنکس فراہم کر دیے جائیں گے۔')"><i class="ri-instagram-line"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h3>اہم روابط</h3>
+                    <ul>
+                        <li><a href="recent-fatwas.html">تازہ ترین فتاویٰ</a></li>
+                        <li><a href="chapters.html">ابوابِ فقہ</a></li>
+                        <li><a href="#" class="open-modal-btn">سوال پوچھیں</a></li>
+                        <li><a href="about.html">ہمارے بارے میں</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>رابطہ کریں</h3>
+                    <ul class="contact-info">
+                        <li><i class="ri-map-pin-line"></i> جامعہ مسجد، مین روڈ، شہر</li>
+                        <li><i class="ri-phone-line"></i> +92 300 1234567</li>
+                        <li><i class="ri-mail-line"></i> info@darulifta.example.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p><span style="font-family: var(--font-nastaliq-kasheeda, 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu'); font-size: 1.2em; color: var(--clr-gold);">&copy; 2026 دار الافتاء. جملہ حقوق محفوظ ہیں۔ ڈیویلپر: زین العابدین عباسی</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Ask Fatwa Modal -->
+    <div id="fatwaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">نیا فتویٰ پوچھیں</h2>
+            <p style="margin-bottom: 20px; color: var(--clr-text-muted); font-size: 0.95rem;">سوال بھیجنے سے پہلے متعلقہ فقہی باب میں تلاش ضرور کرلیں۔ جواب ای میل کے ذریعے دیا جائے گا۔</p>
+
+            <form id="fatwaForm" class="fatwa-form">
+                <div class="form-group">
+                    <label for="name">پورا نام <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" required placeholder="اپنا نام درج کریں">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">ای میل ایڈریس <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">فون نمبر (اختیاری)</label>
+                    <input type="tel" id="phone" name="phone" placeholder="0300 0000000">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">فقہی باب <span class="required">*</span></label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>منتخب کریں...</option>
+                        <option value="ایمان و عقائد">ایمان و عقائد</option>
+                        <option value="طہارت و پاکی">طہارت و پاکی</option>
+                        <option value="نماز و عبادات">نماز و عبادات</option>
+                        <option value="زکوٰۃ و صدقات">زکوٰۃ و صدقات</option>
+                        <option value="حلال و حرام">حلال و حرام</option>
+                        <option value="تجارت و معیشت">تجارت و معیشت</option>
+                        <option value="دیگر">دیگر مسائل</option>
+                    </select>
+                </div>
+
+                <div class="form-group" style="position: relative;">
+                    <label for="question">اپنا سوال تفصیل سے لکھیں <span class="required">*</span></label>
+                    <div style="position: relative;">
+                        <textarea id="question" name="question" required rows="5" placeholder="اپنا سوال واضح اردو رسم الخط میں درج کریں۔۔۔"></textarea>
+                        <button type="button" id="modalMicBtn" class="mic-btn modal-mic" data-tooltip="بول کر سوال لکھیں" aria-label="بول کر سوال لکھیں">
+                            <svg viewBox="0 0 100 150" fill="currentColor" style="width: 22px; height: 22px;">
+                                <rect x="30" y="10" width="40" height="70" rx="20" />
+                                <path d="M 18 45 L 18 80 C 18 97.6 32.4 112 50 112 C 67.6 112 82 97.6 82 80 L 82 45 L 70 45 L 70 80 C 70 91.0 61.0 100 50 100 C 39.0 100 30 91.0 30 80 L 30 45 Z" />
+                                <rect x="43" y="110" width="14" height="25" />
+                                <ellipse cx="50" cy="135" rx="35" ry="12" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="formMessage" class="form-message"></div>
+                <button type="submit" class="btn btn-gold btn-full">سوال جمع کرائیں <i class="ri-send-plane-fill"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Popup Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal-content" style="text-align: center; padding: 3rem 2rem;">
+            <div class="success-icon-wrapper" style="width: 80px; height: 80px; background: var(--clr-emerald-100); color: var(--clr-emerald-600); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 1.5rem;">
+                <i class="ri-check-line"></i>
+            </div>
+            <h2 class="modal-title" style="color: var(--clr-primary-dark); margin-bottom: 1rem; font-size: 2rem;">جزاکم اللہ خیراً</h2>
+            <p style="color: var(--clr-text-main); font-size: 1.15rem; line-height: 1.8; margin-bottom: 2rem;">
+                آپ کا سوال موصول ہو چکا ہے اور متعلقہ مفتی صاحب کو بھیج دیا گیا ہے۔ <br>
+                ان شاء اللہ اگلے ۳۰ دن کے اندر آپ کو ای میل کے ذریعے آپ کے سوال کا مفصل شرعی جواب ارسال کر دیا جائے گا۔<br><br>
+                <span style="font-family: var(--font-nastaliq); color: var(--clr-gold-dark); font-size: 1.3rem;">والسلام</span><br>
+                <span style="font-weight: 600; color: var(--clr-primary);">خیر اندیش: انتظامیہ دار الافتاء</span>
+            </p>
+            <button class="btn btn-primary" id="closeSuccessBtn" style="min-width: 150px;">شکریہ</button>
+        </div>
+    </div>
+
+    <button id="scrollToTopBtn" title="اوپر جائیں" style="display: none; position: fixed; bottom: 20px; right: 20px; z-index: 99; border: none; outline: none; background-color: var(--clr-gold); color: white; cursor: pointer; padding: 15px; border-radius: 50%; font-size: 1.5rem; box-shadow: var(--shadow-md); transition: background-color 0.3s, transform 0.3s; width: 50px; height: 50px; align-items: center; justify-content: center;"><i class="ri-arrow-up-line"></i></button>
+    
+    <script src="script.js"></script>
+    <script src="inheritance.js"></script>
+</body>
+
+</html>
