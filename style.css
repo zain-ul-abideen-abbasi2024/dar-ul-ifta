@@ -1132,11 +1132,7 @@ h4,
     }
 
     .search-bar {
-        padding-inline-end: 2.5rem;
-        padding-inline-start: 2.5rem;
-        font-size: 0.85rem;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+        padding: 0.8rem 5.5rem 0.8rem 2.8rem !important;
+        font-size: 0.9rem;
     }
 }

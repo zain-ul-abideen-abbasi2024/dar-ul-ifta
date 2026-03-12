@@ -420,33 +420,20 @@ Return ONLY a valid JSON array of the IDs of perfectly matching fatwas, ordered 
             const data = Object.fromEntries(formData.entries());
 
             try {
-                const response = await fetch('/api/fatwa', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
+                // Simulate network request since there is no real backend API
+                await new Promise(resolve => setTimeout(resolve, 800));
 
-                const result = await response.json();
+                fatwaForm.reset();
+                modal.style.display = 'none'; // Close question modal
 
-                if (response.ok) {
-                    fatwaForm.reset();
-                    modal.style.display = 'none'; // Close question modal
-
-                    // Show success modal
-                    const successModal = document.getElementById('successModal');
-                    if (successModal) {
-                        successModal.style.display = 'flex';
-                    }
-                } else {
-                    formMessage.className = 'form-message error';
-                    formMessage.textContent = result.message || 'Error occurred';
+                // Show success modal
+                const successModal = document.getElementById('successModal');
+                if (successModal) {
+                    successModal.style.display = 'flex';
                 }
-                formMessage.style.display = 'block';
             } catch (error) {
                 formMessage.className = 'form-message error';
-                formMessage.textContent = 'سرور سے رابطہ نہیں ہوسکا۔ براہ کرم دوبارہ کوشش کریں۔';
+                formMessage.textContent = 'کچھ خرابی پیش آ گئی۔ براہ کرم دوبارہ کوشش کریں۔';
                 formMessage.style.display = 'block';
             } finally {
                 submitBtn.innerHTML = originalBtnText;
