@@ -178,7 +178,7 @@ h4,
 }
 .search-bar {
     width: 100%;
-    padding: 0.8rem 6.5rem 0.8rem 3.5rem !important;
+    padding: 0.8rem 7.5rem 0.8rem 3.5rem !important;
     border-radius: 9999px;
     border: 1px solid var(--clr-border);
     background: var(--clr-bg);
@@ -188,7 +188,6 @@ h4,
     transition: var(--transition);
     text-align: right;
     box-sizing: border-box;
-    text-overflow: ellipsis; /* to gracefully hide very long text */
 }
 
 .search-bar:focus {
@@ -1132,7 +1131,8 @@ h4,
     }
 
     .search-bar {
-        padding: 0.8rem 5.5rem 0.8rem 2.8rem !important;
+        padding: 0.8rem 6.5rem 0.8rem 3.5rem !important;
         font-size: 0.9rem;
+        text-overflow: clip;
     }
 }
