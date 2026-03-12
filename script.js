@@ -490,4 +490,20 @@ Return ONLY a valid JSON array of the IDs of perfectly matching fatwas, ordered 
         });
     }
 
+    // 9. Mobile Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuBtn && navLinks) {
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // Toggle icon
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.className = 'ri-close-line';
+            } else {
+                icon.className = 'ri-menu-line';
+            }
+        });
+    }
 });
