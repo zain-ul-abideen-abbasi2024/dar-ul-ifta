@@ -27,11 +27,30 @@
             </div>
 
             <div class="search-container">
-                <i class="ri-search-line search-icon"></i>
+                <div style="position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; z-index: 5;">
+                    <button id="searchMicBtn" class="mic-btn" data-tooltip="آواز ریکارڈ کریں" aria-label="بول کر تلاش کریں">
+                        <svg viewBox="0 0 100 150" fill="currentColor" style="width: 22px; height: 22px;">
+                            <!-- Capsule -->
+                            <rect x="30" y="10" width="40" height="70" rx="20" />
+                            <!-- U-Bracket -->
+                            <path d="M 18 45 L 18 80 C 18 97.6 32.4 112 50 112 C 67.6 112 82 97.6 82 80 L 82 45 L 70 45 L 70 80 C 70 91.0 61.0 100 50 100 C 39.0 100 30 91.0 30 80 L 30 45 Z" />
+                            <!-- Stem -->
+                            <rect x="43" y="110" width="14" height="25" />
+                            <!-- Base -->
+                            <ellipse cx="50" cy="135" rx="35" ry="12" />
+                        </svg>
+                    </button>
+                    <div class="search-action-btn" data-tooltip="تلاش کریں">
+                        <i class="ri-search-line" style="font-size: 1.2rem;"></i>
+                    </div>
+                </div>
+                
                 <input type="text" class="search-bar" id="searchInput"
                     placeholder="فتاویٰ مسائل یا مفتیان کرام تلاش کریں" dir="auto" autocomplete="off">
-                <i class="ri-close-line search-clear" id="searchClear"
-                    style="display: none; position: absolute; right: 1.5rem; top: 50%; transform: translateY(-50%); cursor: pointer; color: var(--clr-text-muted); font-size: 1.2rem;"></i>
+                
+                <div class="search-clear" id="searchClear" style="display: none;" data-tooltip="صاف کریں" aria-label="صاف کریں">
+                    <i class="ri-close-line" style="font-size: 1.2rem;"></i>
+                </div>
                 <div class="search-results-dropdown" id="searchResults"></div>
             </div>
 
@@ -329,10 +348,24 @@
                     </select>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="position: relative;">
                     <label for="question">اپنا سوال تفصیل سے لکھیں <span class="required">*</span></label>
-                    <textarea id="question" name="question" required rows="5"
-                        placeholder="اپنا سوال واضح اردو رسم الخط میں درج کریں۔۔۔"></textarea>
+                    <div style="position: relative;">
+                        <textarea id="question" name="question" required rows="5"
+                            placeholder="اپنا سوال واضح اردو رسم الخط میں درج کریں۔۔۔"></textarea>
+                        <button type="button" id="modalMicBtn" class="mic-btn modal-mic" data-tooltip="بول کر سوال لکھیں" aria-label="بول کر سوال لکھیں">
+                            <svg viewBox="0 0 100 150" fill="currentColor" style="width: 22px; height: 22px;">
+                                <!-- Capsule -->
+                                <rect x="30" y="10" width="40" height="70" rx="20" />
+                                <!-- U-Bracket -->
+                                <path d="M 18 45 L 18 80 C 18 97.6 32.4 112 50 112 C 67.6 112 82 97.6 82 80 L 82 45 L 70 45 L 70 80 C 70 91.0 61.0 100 50 100 C 39.0 100 30 91.0 30 80 L 30 45 Z" />
+                                <!-- Stem -->
+                                <rect x="43" y="110" width="14" height="25" />
+                                <!-- Base -->
+                                <ellipse cx="50" cy="135" rx="35" ry="12" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div id="formMessage" class="form-message"></div>

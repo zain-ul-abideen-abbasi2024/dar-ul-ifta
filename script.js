@@ -35,44 +35,85 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 3. Search Bar Interactivity
+    // 3. Search Bar Interactivity & Gemini AI Smart Search
     const searchBar = document.getElementById('searchInput');
     const searchDropdown = document.getElementById('searchResults');
+    const searchMicBtn = document.getElementById('searchMicBtn');
+    
+    // Gemini API Key for Semantic Search
+    const GEMINI_API_KEY = "AIzaSyDklba_NS3cNu4good9kqPdfL1sXiPOIno";
+
+    // Enhanced Mock database with more Fatwas for better semantic search demonstration
+    const fatwaDatabase = [
+        {
+            title: 'ڈیجیٹل کرنسی (کرپٹو) میں سرمایہ کاری کا شرعی حکم کیا ہے؟',
+            snippet: 'جدید دور میں کرپٹو کرنسی کی خرید و فروخت کے حوالے سے علمائے کرام کی آراء اور شرعی اصولوں کی روشنی میں تفصیلی جائزہ...',
+            category: 'تجارت و معیشت',
+            date: '۱۲ رجب ۱۴۴۷ھ',
+            mufti: 'مفتی محمد احمد',
+            keywords: 'crypto bitcoin trading digital currency حرام حلال سود'
+        },
+        {
+            title: 'ٹرین یا ہوائی جہاز میں نماز ادا کرنے کا کیا طریقہ ہے؟',
+            snippet: 'دوران سفر سواری کے اندر نماز فرض ادا کرنے کی شرائط، قیام اور قبلہ رخ ہونے کے حوالے سے تفصیلی شرعی احکام...',
+            category: 'نماز',
+            date: '۱۱ رجب ۱۴۴۷ھ',
+            mufti: 'مفتی عبداللہ',
+            keywords: 'safar plane airplane train qibla direction prayer سفر قصر قبلہ'
+        },
+        {
+            title: 'پلاٹ یا پراپرٹی پر زکوٰۃ کی کٹوتی کے اصول کیا ہیں؟',
+            snippet: 'وہ زمین یا پراپرٹی جو ذاتی استعمال کے لیے ہو یا تجارت کی نیت سے خریدی گئی ہو، اس پر زکوٰۃ کی فرضیت کے اصول...',
+            category: 'زکوٰۃ',
+            date: '۱۰ رجب ۱۴۴۷ھ',
+            mufti: 'مفتی ابراہیم قاسمی',
+            keywords: 'zakat property land tax plot zakah زکوۃ زمین جائیداد'
+        },
+        {
+            title: 'وراثت میں بیٹی کا کتنا حصہ مقرر ہے؟',
+            snippet: 'قرآن و سنت کی روشنی میں وراثت کی تقسیم، خاص طور پر بیٹی، بہن اور بیوی کے حقوق اور حصوں کی تفصیل...',
+            category: 'وراثت',
+            date: '۸ رجب ۱۴۴۷ھ',
+            mufti: 'مفتی محمد احمد',
+            keywords: 'inheritance daughter share property will وصیت بیٹی وارث ترکہ'
+        },
+        {
+            title: 'کیا شوہر غصے میں طلاق دے تو واقع ہو جاتی ہے؟',
+            snippet: 'غصے کی حالت (غضب) میں دی گئی طلاق کے مختلف درجات اور شرعی احکام پر تفصیلی فتویٰ...',
+            category: 'نکاح و طلاق',
+            date: '۵ رجب ۱۴۴۷ھ',
+            mufti: 'مفتی ابراہیم قاسمی',
+            keywords: 'divorce anger talaq shohar biwi خلع میاں بیوی غصہ'
+        },
+        {
+            title: 'رمضان میں شوگر ٹیسٹ کے لیے خون نکالنے سے روزہ ٹوٹتا ہے؟',
+            snippet: 'روزے کی حالت میں انجکشن لگوانے، خون ٹیسٹ کروانے یا ڈرپ لگوانے سے متعلق مسائل...',
+            category: 'روزہ',
+            date: '۱ رمضان ۱۴۴۶ھ',
+            mufti: 'مفتی عبداللہ',
+            keywords: 'roza fasting blood test injection sugar diabetes رمضان روزے دار'
+        }
+    ];
 
     if (searchBar && searchDropdown) {
-
-        // Data source mockup based on existing DOM cards (can be replaced by API later)
-        const getFatwasData = () => {
-            const fatwaCards = document.querySelectorAll('.fatwa-grid .fatwa-card');
-            return Array.from(fatwaCards).map(card => {
-                return {
-                    title: card.querySelector('.fatwa-question').textContent,
-                    snippet: card.querySelector('.fatwa-snippet').textContent,
-                    category: card.querySelector('.fatwa-category').textContent,
-                    date: card.querySelector('.fatwa-date').textContent,
-                    mufti: card.querySelector('.mufti-name').textContent
-                };
-            });
+        
+        let typingTimer;
+        const doneTypingInterval = 800; // Wait for user to stop typing before calling API
+        
+        // Show loading state
+        const showSearchLoading = () => {
+            searchDropdown.innerHTML = `
+                <div class="search-no-results">
+                    <i class="ri-loader-4-line ri-spin" style="color: var(--clr-primary);"></i>
+                    <p>سوال کا مفہوم سمجھا جا رہا ہے...</p>
+                </div>
+            `;
+            searchDropdown.style.display = 'block';
         };
 
-        searchBar.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            const fatwas = getFatwasData();
-
-            if (query.length === 0) {
-                searchDropdown.style.display = 'none';
-                return;
-            }
-
-            const results = fatwas.filter(f =>
-                f.title.toLowerCase().includes(query) ||
-                f.snippet.toLowerCase().includes(query) ||
-                f.category.toLowerCase().includes(query) ||
-                f.mufti.toLowerCase().includes(query)
-            );
-
+        // Render results
+        const renderResults = (results) => {
             searchDropdown.innerHTML = '';
-
             if (results.length > 0) {
                 results.forEach(result => {
                     const item = document.createElement('a');
@@ -83,27 +124,176 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div style="font-size: 0.9rem; color: var(--clr-text-muted); margin-bottom: 0.5rem;">${result.snippet.substring(0, 60)}...</div>
                         <div class="search-result-category">${result.category} &bull; ${result.mufti}</div>
                     `;
-                    // Note: Since it's an actual link now, clicking it will navigate away
                     searchDropdown.appendChild(item);
                 });
             } else {
                 searchDropdown.innerHTML = `
                     <div class="search-no-results">
                         <i class="ri-search-eye-line"></i>
-                        <p>کوئی نتیجہ نہیں ملا</p>
+                        <p>اس سے متعلق کوئی فتویٰ نہیں ملا</p>
                     </div>
                 `;
             }
-
             searchDropdown.style.display = 'block';
+        };
+
+        // Gemini AI Semantic Search Logic
+        const performSemanticSearch = async (query) => {
+            try {
+                // Construct prompt containing our database
+                const dbContext = fatwaDatabase.map((f, i) => 
+                    `[ID: ${i}] Title: ${f.title} | Snippet: ${f.snippet} | Category: ${f.category} | Keywords: ${f.keywords}`
+                ).join('\n');
+
+                const prompt = `You are a semantic search engine for an Islamic Fatwa (Dar-ul-Ifta) website. 
+User's query (in Urdu or Roman Urdu): "${query}"
+
+Here is the database of available fatwas:
+${dbContext}
+
+Task: Find the best matching fatwas that conceptually answer or relate to the user's query. The query might not contain the exact words, but might ask about the concepts (e.g., query "aurat ki wirasat" matches the fatwa about "وراثت میں بیٹی کا حصہ").
+Return ONLY a valid JSON array of the IDs of perfectly matching fatwas, ordered by relevance (best match first). Return an empty array [] if nothing is conceptually related. Do not return markdown, just the JSON array like: [3, 0].`;
+
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        generationConfig: { temperature: 0.1 }
+                    })
+                });
+
+                const data = await response.json();
+                if (data.error) throw new Error(data.error.message);
+
+                let textResponse = data.candidates[0].content.parts[0].text.trim();
+                // clean markdown if Gemini wraps it
+                textResponse = textResponse.replace(/^```json\s*/, '').replace(/```\s*$/, '');
+                
+                const matchedIds = JSON.parse(textResponse);
+                const matchedFatwas = matchedIds.map(id => fatwaDatabase[id]).filter(f => f);
+                
+                renderResults(matchedFatwas);
+                
+            } catch (error) {
+                console.error("Semantic search error:", error);
+                // Fallback to basic text search if API fails
+                const fallbackResults = fatwaDatabase.filter(f =>
+                    f.title.includes(query) || f.snippet.includes(query) || f.category.includes(query)
+                );
+                renderResults(fallbackResults);
+            }
+        };
+
+        searchBar.addEventListener('input', (e) => {
+            const query = e.target.value.trim();
+            clearTimeout(typingTimer);
+            
+            if (query.length === 0) {
+                searchDropdown.style.display = 'none';
+                return;
+            }
+
+            // Fallback fast text search for immediate visual feedback before AI kicks in
+            const fastResults = fatwaDatabase.filter(f => f.title.includes(query) || f.category.includes(query));
+            if(fastResults.length > 0 && query.length < 3) {
+                 renderResults(fastResults);
+            } else {
+                 showSearchLoading();
+                 typingTimer = setTimeout(() => {
+                     performSemanticSearch(query);
+                 }, doneTypingInterval);
+            }
         });
 
         // Close dropdown when clicking outside
         document.addEventListener('click', (e) => {
-            if (!searchBar.contains(e.target) && !searchDropdown.contains(e.target)) {
+            if (!searchBar.contains(e.target) && !searchDropdown.contains(e.target) && e.target !== searchMicBtn && !searchMicBtn?.contains(e.target)) {
                 searchDropdown.style.display = 'none';
             }
         });
+    }
+
+    // --- Voice to Text functionality (Web Speech API) ---
+    const initVoiceRecognition = (btnElement, inputElement, onResultCallback) => {
+        if (!btnElement || !inputElement) return;
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            btnElement.style.display = 'none'; // Hide if browser doesn't support
+            console.warn("Speech Recognition API not supported in this browser.");
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'ur-PK'; // Set language to Urdu (Pakistan)
+        recognition.interimResults = true; // Show results as they are spoken
+        recognition.maxAlternatives = 1;
+
+        let isRecording = false;
+
+        btnElement.addEventListener('click', () => {
+            if (isRecording) {
+                recognition.stop();
+            } else {
+                recognition.start();
+                inputElement.focus();
+            }
+        });
+
+        recognition.onstart = () => {
+            isRecording = true;
+            btnElement.classList.add('recording');
+            inputElement.placeholder = "سن رہا ہوں... بولیے";
+        };
+
+        recognition.onresult = (event) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                } else {
+                    // Interim results could be appended if needed, but we assign final directly
+                    inputElement.value = event.results[i][0].transcript; 
+                }
+            }
+            if (finalTranscript !== '') {
+                inputElement.value = finalTranscript;
+                if(onResultCallback) onResultCallback(finalTranscript);
+            }
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Speech recognition error", event.error);
+            btnElement.classList.remove('recording');
+            isRecording = false;
+        };
+
+        recognition.onend = () => {
+            isRecording = false;
+            btnElement.classList.remove('recording');
+            inputElement.placeholder = inputElement.id === 'question' ? "اپنا سوال واضح اردو رسم الخط میں درج کریں۔۔۔" : "فتاویٰ مسائل یا مفتیان کرام تلاش کریں";
+            
+            // Re-trigger input event to run search or validation
+            const event = new Event('input', { bubbles: true });
+            inputElement.dispatchEvent(event);
+        };
+    };
+
+    // Initialize Voice Search for Search Bar
+    if(document.getElementById('searchMicBtn') && document.getElementById('searchInput')) {
+        initVoiceRecognition(
+            document.getElementById('searchMicBtn'), 
+            document.getElementById('searchInput')
+        );
+    }
+
+    // Initialize Voice Text for Modal Question area
+    if(document.getElementById('modalMicBtn') && document.getElementById('question')) {
+        initVoiceRecognition(
+            document.getElementById('modalMicBtn'), 
+            document.getElementById('question')
+        );
     }
 
     // 4. Subtle hover interaction for Fatwa Cards to tilt slightly
@@ -163,51 +353,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 6. Fix Search Bar Direction for Automatic Browser Translation and Clear Icon
-    const htmlLangAttrBase = document.documentElement.lang;
+    // Removed legacy mutation observer for LTR/RTL that was overriding CSS paddings.
     const searchInput = document.querySelector('.search-bar');
-    const searchClear = document.getElementById('searchClear');
+    const searchClearIcon = document.getElementById('searchClear');
 
     if (searchInput) {
         // Search clear icon logic
-        if (searchClear) {
+        if (searchClearIcon) {
             searchInput.addEventListener('input', function () {
                 if (this.value.length > 0) {
-                    searchClear.style.display = 'block';
+                    searchClearIcon.style.display = 'flex'; // Changed from 'block' to 'flex' so centering works
                 } else {
-                    searchClear.style.display = 'none';
+                    searchClearIcon.style.display = 'none';
                 }
             });
 
-            searchClear.addEventListener('click', function () {
+            searchClearIcon.addEventListener('click', function () {
                 searchInput.value = '';
-                searchClear.style.display = 'none';
+                searchClearIcon.style.display = 'none';
                 searchInput.focus();
+                // trigger input event to reset search results
+                searchInput.dispatchEvent(new Event('input', { bubbles: true }));
             });
         }
-
-        // Observer to detect when Google Translate modifies the HTML tag
-        const mutationObserver = new MutationObserver(mutations => {
-            mutations.forEach(mutation => {
-                if (mutation.attributeName === 'lang' || mutation.attributeName === 'class') {
-                    const currentLang = document.documentElement.lang;
-                    // Google translate sometimes adds classes or changes lang
-                    if (currentLang.toLowerCase().includes('en') || document.documentElement.classList.contains('translated-ltr')) {
-                        // Switch completely to LTR when English is detected
-                        searchInput.style.direction = "ltr";
-                        searchInput.style.textAlign = "left";
-                    } else if (currentLang.toLowerCase().includes('ur') || currentLang === htmlLangAttrBase) {
-                        // Revert to RTL when Urdu is active
-                        searchInput.style.direction = "rtl";
-                        searchInput.style.textAlign = "right";
-                    }
-                }
-            });
-        });
-
-        mutationObserver.observe(document.documentElement, {
-            attributes: true,
-            attributeFilter: ['lang', 'class']
-        });
     }
 
     // 7. Modal Open/Close Logic
