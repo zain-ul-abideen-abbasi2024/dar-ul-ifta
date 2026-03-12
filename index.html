@@ -26,42 +26,24 @@
                 <img src="logo.png" alt="دار الافتاء" class="logo-img">
             </div>
 
-            <div class="search-container">
-                <div style="position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 8px; z-index: 5;">
-                    <button id="searchMicBtn" class="mic-btn" data-tooltip="آواز ریکارڈ کریں" aria-label="بول کر تلاش کریں">
-                        <svg viewBox="0 0 100 150" fill="currentColor" style="width: 22px; height: 22px;">
-                            <!-- Capsule -->
-                            <rect x="30" y="10" width="40" height="70" rx="20" />
-                            <!-- U-Bracket -->
-                            <path d="M 18 45 L 18 80 C 18 97.6 32.4 112 50 112 C 67.6 112 82 97.6 82 80 L 82 45 L 70 45 L 70 80 C 70 91.0 61.0 100 50 100 C 39.0 100 30 91.0 30 80 L 30 45 Z" />
-                            <!-- Stem -->
-                            <rect x="43" y="110" width="14" height="25" />
-                            <!-- Base -->
-                            <ellipse cx="50" cy="135" rx="35" ry="12" />
-                        </svg>
-                    </button>
-                    <div class="search-action-btn" data-tooltip="تلاش کریں">
-                        <i class="ri-search-line" style="font-size: 1.2rem;"></i>
-                    </div>
-                </div>
-                
+            <nav class="nav-pill">
+                <ul class="nav-links">
+                    <li><a href="index.html">گھر</a></li>
+                    <li><a href="chapters.html">ابوابِ فقہ</a></li>
+                    <li><a href="recent-fatwas.html">تازہ ترین فتاویٰ</a></li>
+                    <li><a href="inheritance.html">وراثت کا نقشہ</a></li>
+                    <li><a href="about.html">ہمارے بارے میں</a></li>
+                </ul>
+            </nav>
+
+            <div class="search-container" style="flex: 0 1 320px;">
                 <input type="text" class="search-bar" id="searchInput"
-                    placeholder="فتاویٰ مسائل یا مفتیان کرام تلاش کریں" dir="auto" autocomplete="off">
+                    placeholder="تلاش کریں" dir="auto" autocomplete="off" style="padding: 0.7rem 1.5rem 0.7rem 2.5rem !important;">
                 
                 <div class="search-clear" id="searchClear" style="display: none;" data-tooltip="صاف کریں" aria-label="صاف کریں">
                     <i class="ri-close-line" style="font-size: 1.2rem;"></i>
                 </div>
                 <div class="search-results-dropdown" id="searchResults"></div>
-            </div>
-
-            <div class="header-actions" style="display: flex; align-items: center; gap: 1rem;">
-                <a href="inheritance.html" class="btn btn-outline" style="border: 1px solid var(--clr-primary); padding: 0.6rem 1.2rem; background: var(--clr-emerald-50);">
-                    <i class="ri-node-tree"></i> وراثت کا نقشہ
-                </a>
-                <button class="btn btn-gold open-modal-btn" id="header-ask-btn">
-                    <i class="ri-quill-pen-line"></i>
-                    نیا فتویٰ پوچھیں
-                </button>
             </div>
         </div>
     </header>
