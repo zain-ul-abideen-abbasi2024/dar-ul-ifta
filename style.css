@@ -265,7 +265,7 @@ h4,
 }
 .search-bar {
     width: 100%;
-    padding: 0.8rem 7.5rem 0.8rem 3.5rem !important;
+    padding: 0.8rem 3.5rem 0.8rem 7.5rem !important; /* Icons on the left, more padding there */
     border-radius: 9999px;
     border: 1px solid var(--clr-border);
     background: var(--clr-bg);
@@ -1306,7 +1306,7 @@ h4,
     }
 
     .search-bar {
-        padding: 0.8rem 6.5rem 0.8rem 3.5rem !important;
+        padding: 0.8rem 3.5rem 0.8rem 6.5rem !important;
         font-size: 1rem;
         height: auto;
         min-height: 65px; /* More height to prevent dot clipping */

@@ -26,17 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 2. Loader Logic
-    const preloader = document.getElementById('preloader');
     const progressBar = document.getElementById('scroll-progress');
-
-    // Hide Preloader
-    if (preloader) {
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                preloader.classList.add('fade-out');
-            }, 300);
-        });
-    }
 
     // Scroll Progress Bar Update
     if (progressBar) {
