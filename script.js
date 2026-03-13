@@ -25,13 +25,28 @@ document.addEventListener('DOMContentLoaded', () => {
         categoriesObserver.observe(group);
     });
 
-    // 2. Hide Preloader when page is fully loaded
+    // 2. Loader Logic
     const preloader = document.getElementById('preloader');
+    const progressBar = document.getElementById('scroll-progress');
+
+    // Hide Preloader
     if (preloader) {
         window.addEventListener('load', () => {
             setTimeout(() => {
                 preloader.classList.add('fade-out');
-            }, 300); // Slight delay for smoothness
+            }, 300);
+        });
+    }
+
+    // Scroll Progress Bar Update
+    if (progressBar) {
+        window.addEventListener('scroll', () => {
+            const h = document.documentElement;
+            const b = document.body;
+            const st = 'scrollTop';
+            const sh = 'scrollHeight';
+            const percent = (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
+            progressBar.style.width = percent + '%';
         });
     }
 

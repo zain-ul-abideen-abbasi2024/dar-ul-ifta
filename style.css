@@ -53,6 +53,17 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Scroll Progress Bar */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    right: 0; /* Align to right for RTL */
+    width: 0%;
+    height: 4px;
+    background: #000;
+    z-index: 100001;
+}
+
 /* Preloader Styles */
 #preloader {
     position: fixed;
@@ -1296,9 +1307,10 @@ h4,
 
     .search-bar {
         padding: 0.8rem 6.5rem 0.8rem 3.5rem !important;
-        font-size: 0.95rem; /* Revert closer to original for mobile stability */
-        height: 55px; /* Balanced height for Nastaliq on mobile */
-        line-height: normal;
+        font-size: 1rem;
+        height: auto;
+        min-height: 65px; /* More height to prevent dot clipping */
+        line-height: 2 !important; /* Increased for Nastaliq glyphs */
         text-overflow: clip;
     }
 }
