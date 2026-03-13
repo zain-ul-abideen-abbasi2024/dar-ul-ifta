@@ -64,40 +64,7 @@ html {
     z-index: 100001;
 }
 
-/* Preloader Styles */
-#preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--clr-bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-    transition: opacity 0.5s ease, visibility 0.5s;
-}
-
-.loader-star {
-    width: 60px;
-    height: 60px;
-    background: var(--clr-primary);
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    animation: rotate-pulse 2s infinite ease-in-out;
-}
-
-@keyframes rotate-pulse {
-    0% { transform: rotate(0deg) scale(0.8); opacity: 0.5; }
-    50% { transform: rotate(180deg) scale(1.2); opacity: 1; }
-    100% { transform: rotate(360deg) scale(0.8); opacity: 0.5; }
-}
-
-#preloader.fade-out {
-    opacity: 0;
-    visibility: hidden;
-}
-
+/* Body Styles */
 body {
     font-family: var(--font-nastaliq);
     background-color: var(--clr-bg);
@@ -265,7 +232,7 @@ h4,
 }
 .search-bar {
     width: 100%;
-    padding: 0.8rem 3.5rem 0.8rem 7.5rem !important; /* Icons on the left, more padding there */
+    padding: 0.8rem 7.5rem 0.8rem 3.5rem !important; /* Icons on the right, more padding there */
     border-radius: 9999px;
     border: 1px solid var(--clr-border);
     background: var(--clr-bg);
@@ -1306,7 +1273,7 @@ h4,
     }
 
     .search-bar {
-        padding: 0.8rem 3.5rem 0.8rem 6.5rem !important;
+        padding: 0.8rem 6.5rem 0.8rem 3.5rem !important;
         font-size: 1rem;
         height: auto;
         min-height: 65px; /* More height to prevent dot clipping */
