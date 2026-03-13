@@ -27,13 +27,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Add dynamic subtle parallax to geometric background based on scroll
     const patternBg = document.querySelector('.pattern-bg');
-    window.addEventListener('scroll', () => {
-        const scrollPosition = window.scrollY;
-        // Move the background slightly downwards (the "loader" effect requested)
-        if (patternBg) {
-            patternBg.style.transform = `translateY(${scrollPosition * 0.1}px)`;
-        }
-    });
+    if (patternBg) {
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            // Move the background slightly downwards (parallax "loader" effect)
+            requestAnimationFrame(() => {
+                patternBg.style.transform = `translateY(${scrollPosition * 0.12}px)`;
+            });
+        });
+    }
 
     // 3. Search Bar Interactivity & Gemini AI Smart Search
     const searchBar = document.getElementById('searchInput');
