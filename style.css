@@ -69,11 +69,11 @@ body {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 250vh; /* Extra height to ensure no gaps during long scroll */
+    height: 250vh; 
     z-index: -1;
-    opacity: 0.15; /* Increased opacity slightly for better visibility on live */
+    opacity: 0.22; /* Increased for better visibility on live, as requested */
     pointer-events: none;
-    background-image: url("WhatsApp Image 2026-03-13 at 5.40.13 AM.jpeg");
+    background-image: url("bg-pattern.jpeg"); /* Simplified filename */
     background-size: 800px; 
     background-repeat: repeat;
     filter: grayscale(100%) brightness(0%);
@@ -1261,8 +1261,10 @@ h4,
     }
 
     .search-bar {
-        padding: 0.7rem 3.5rem 0.7rem 3rem !important; /* Reduced padding for mobile to fix font cutting */
-        font-size: 0.95rem;
+        padding: 0.8rem 3.5rem 0.8rem 3rem !important;
+        font-size: 1.1rem; /* Slightly larger for clarity */
+        height: 60px; /* Increased height to give font more room */
+        line-height: 2 !important; /* Proper line height for Nastaliq */
         text-overflow: ellipsis;
     }
 }
