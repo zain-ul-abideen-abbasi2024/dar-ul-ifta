@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const patternBg = document.querySelector('.pattern-bg');
     window.addEventListener('scroll', () => {
         const scrollPosition = window.scrollY;
-        // Move the background slightly
+        // Shift the background position slightly for a smooth parallax effect
         if (patternBg) {
-            patternBg.style.transform = `translateY(${scrollPosition * 0.15}px)`;
+            patternBg.style.backgroundPositionY = `${scrollPosition * 0.1}px`;
         }
     });
 
