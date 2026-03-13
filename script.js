@@ -25,23 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
         categoriesObserver.observe(group);
     });
 
-    // 2. Add dynamic subtle parallax to geometric background based on scroll
-    const patternBg = document.querySelector('.pattern-bg');
-    if (patternBg) {
-        let lastKnownScrollPosition = 0;
-        let ticking = false;
-
+    // 2. Add dynamic scroll progress bar "loader" at the top
+    const progressBar = document.getElementById('scroll-progress');
+    if (progressBar) {
         window.addEventListener('scroll', () => {
-            lastKnownScrollPosition = window.scrollY || window.pageYOffset;
-
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    // Increased factor for better visibility of the "loader" movement
-                    patternBg.style.transform = `translateY(${lastKnownScrollPosition * 0.2}px)`;
-                    ticking = false;
-                });
-                ticking = true;
-            }
+            const h = document.documentElement;
+            const b = document.body;
+            const st = 'scrollTop';
+            const sh = 'scrollHeight';
+            const percent = (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
+            progressBar.style.width = percent + '%';
         });
     }
 

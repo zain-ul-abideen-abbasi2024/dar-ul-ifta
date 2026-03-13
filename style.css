@@ -53,6 +53,16 @@ html {
     scroll-behavior: smooth;
 }
 
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: #000;
+    z-index: 9999;
+}
+
 body {
     font-family: var(--font-nastaliq);
     background-color: var(--clr-bg);
@@ -1261,9 +1271,10 @@ h4,
     }
 
     .search-bar {
-        padding: 0.8rem 6.5rem 0.8rem 3.5rem !important; /* Restore correct padding */
-        font-size: 1.15rem; /* Better clarity */
-        height: 70px; /* Significant extra height for Urdu glyphs */
+        padding: 0.8rem 6.5rem 0.8rem 3.5rem !important;
+        font-size: 1.1rem;
+        height: auto; /* Revert to auto height as requested */
+        min-height: 50px;
         line-height: normal;
         text-overflow: clip;
     }
