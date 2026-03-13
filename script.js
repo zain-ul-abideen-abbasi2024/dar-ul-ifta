@@ -28,12 +28,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Add dynamic subtle parallax to geometric background based on scroll
     const patternBg = document.querySelector('.pattern-bg');
     if (patternBg) {
+        let lastKnownScrollPosition = 0;
+        let ticking = false;
+
         window.addEventListener('scroll', () => {
-            const scrollPosition = window.scrollY;
-            // Move the background slightly downwards (parallax "loader" effect)
-            requestAnimationFrame(() => {
-                patternBg.style.transform = `translateY(${scrollPosition * 0.12}px)`;
-            });
+            lastKnownScrollPosition = window.scrollY || window.pageYOffset;
+
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    // Increased factor for better visibility of the "loader" movement
+                    patternBg.style.transform = `translateY(${lastKnownScrollPosition * 0.2}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
     }
 

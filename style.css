@@ -1261,11 +1261,11 @@ h4,
     }
 
     .search-bar {
-        padding: 0.8rem 3.5rem 0.8rem 3rem !important;
-        font-size: 1.1rem; /* Slightly larger for clarity */
-        height: 60px; /* Increased height to give font more room */
-        line-height: 2 !important; /* Proper line height for Nastaliq */
-        text-overflow: ellipsis;
+        padding: 0.8rem 6.5rem 0.8rem 3.5rem !important; /* Restore correct padding */
+        font-size: 1.15rem; /* Better clarity */
+        height: 70px; /* Significant extra height for Urdu glyphs */
+        line-height: normal;
+        text-overflow: clip;
     }
 }
 
