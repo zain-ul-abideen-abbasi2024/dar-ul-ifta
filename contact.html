@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رابطہ کریں | دار الافتاء</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+</head>
+
+<body>
+    <div class="pattern-bg"></div>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none;"><span class="logo-text">دار الافتاء</span></a>
+            </div>
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-outline">واپس ہوم پیج</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container" style="padding: 4rem 1.5rem;">
+        <div class="section-header improved-spacing">
+            <h1 class="section-title">ہم سے رابطہ کریں</h1>
+            <p class="section-desc">آپ اپنے شرعی مسائل، تجاویز یا شکایات کے لیے نیچے دیے گئے فارم کے ذریعے یا براہِ راست رابطہ کر سکتے ہیں۔</p>
+        </div>
+
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: start;">
+            <!-- Contact Form -->
+            <div class="card" style="background: var(--clr-surface); padding: 2.5rem; border-radius: 1.5rem; box-shadow: var(--shadow-md); border: 1px solid var(--clr-border);">
+                <form id="contactForm" class="fatwa-form">
+                    <div class="form-group">
+                        <label>پورا نام</label>
+                        <input type="text" name="name" required placeholder="اپنا نام درج کریں">
+                    </div>
+                    <div class="form-group">
+                        <label>ای میل ایڈریس</label>
+                        <input type="email" name="email" required placeholder="example@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>موضوع (Subject)</label>
+                        <input type="text" name="subject" required placeholder="رابطہ کی وجہ">
+                    </div>
+                    <div class="form-group">
+                        <label>آپ کا پیغام</label>
+                        <textarea name="message" rows="5" required placeholder="اپنا پیغام یہاں لکھیں۔۔۔"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gold btn-full">پیغام بھیجیں <i class="ri-send-plane-fill"></i></button>
+                </form>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-details improved-spacing">
+                <div class="mufti-card" style="text-align: right; padding: 2rem;">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                         <div class="icon-wrapper" style="margin: 0;"><i class="ri-map-pin-2-fill"></i></div>
+                         <div>
+                             <h3 style="margin: 0;">پتہ</h3>
+                             <p style="margin: 0;">جامعہ مسجد، مین روڈ، کراچی، پاکستان</p>
+                         </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                         <div class="icon-wrapper" style="margin: 0;"><i class="ri-phone-fill"></i></div>
+                         <div>
+                             <h3 style="margin: 0;">فون نمبر</h3>
+                             <p style="margin: 0; direction: ltr;">+92 300 1234567</p>
+                         </div>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                         <div class="icon-wrapper" style="margin: 0;"><i class="ri-mail-fill"></i></div>
+                         <div>
+                             <h3 style="margin: 0;">ای میل</h3>
+                             <p style="margin: 0;">info@darulifta.example.com</p>
+                         </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; background: var(--clr-emerald-100); padding: 1.5rem; border-radius: 1rem; border-right: 5px solid var(--clr-primary);">
+                    <p style="font-size: 1.1rem; color: var(--clr-primary-dark);">
+                        <strong>نوٹ:</strong> فتاویٰ پوچھنے کے لیے براہِ کرم ہوم پیج پر موجود "سوال پوچھیں" کا بٹن استعمال کریں تاکہ آپ کا سوال متعلقہ شعبے تک پہنچ سکے۔
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p><span
+                        style="font-family: var(--font-nastaliq-kasheeda, 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu'); font-size: 1.2em; color: var(--clr-gold);">&copy;
+                        2026 دار الافتاء. جملہ حقوق محفوظ ہیں۔ ڈیویلپر: زین العابدین عباسی</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

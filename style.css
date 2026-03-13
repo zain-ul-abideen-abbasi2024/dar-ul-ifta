@@ -22,7 +22,12 @@
     --clr-border: #d4ccb9;
 
     /* Fonts */
-    --font-nastaliq: 'Jameel Noori Nastaleeq', 'Nafees', 'Nafees Nastaleeq', 'Noto Nastaliq Urdu', serif;
+    @font-face {
+        font-family: 'Mehr-Nastaliq';
+        src: url('https://cdn.jsdelivr.net/gh/alif-type/mehr-nastaliq@latest/font/MehrNastaleeq-Regular.woff2') format('woff2');
+        font-display: swap;
+    }
+    --font-nastaliq: 'Mehr-Nastaliq', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
     --font-nastaliq-kasheeda: 'Jameel Noori Nastaleeq Kasheeda', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
     --font-arabic: 'Aref Ruqaa', serif;
     --font-quran: 'Amiri', 'Traditional Arabic', serif;
@@ -66,11 +71,12 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: -1;
-    opacity: 0.4;
+    opacity: 0.08; /* Slightly more opaque for better visibility */
     pointer-events: none;
-    background-color: var(--clr-emerald-50);
-    /* Subtle geometric SVG pattern via data URI */
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23046346' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("WhatsApp Image 2026-03-13 at 5.40.13 AM.jpeg");
+    background-size: 1000px; /* Much larger as requested */
+    background-repeat: repeat;
+    filter: grayscale(100%) brightness(0%); /* Make the pattern lines black */
 }
 
 /* Typography Enhancements */
@@ -1243,3 +1249,23 @@ h4,
         text-overflow: clip;
     }
 }
+
+/* Improved spacing for Urdu text to prevent overlapping */
+.improved-spacing h2,
+.improved-spacing h3,
+.improved-spacing p,
+.improved-spacing .fatwa-question,
+.improved-spacing .fatwa-snippet,
+.improved-spacing .section-desc {
+    word-spacing: 0.15rem !important;
+    line-height: 2.5 !important;
+    font-family: var(--font-nastaliq) !important;
+}
+
+.category-card h3 {
+    margin-bottom: 0.75rem;
+}
+
+.fatwa-question {
+    margin-bottom: 1.5rem !important;
+}
