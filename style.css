@@ -27,8 +27,9 @@
         src: url('https://cdn.jsdelivr.net/gh/alif-type/mehr-nastaliq@latest/font/MehrNastaleeq-Regular.woff2') format('woff2');
         font-display: swap;
     }
-    --font-nastaliq: 'Mehr-Nastaliq', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
-    --font-nastaliq-kasheeda: 'Jameel Noori Nastaleeq Kasheeda', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif;
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400..700&display=swap');
+    --font-nastaliq: 'Noto Nastaliq Urdu', 'Mehr-Nastaliq', 'Jameel Noori Nastaleeq', serif;
+    --font-nastaliq-kasheeda: 'Jameel Noori Nastaleeq Kasheeda', 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', serif;
     --font-arabic: 'Aref Ruqaa', serif;
     --font-quran: 'Amiri', 'Traditional Arabic', serif;
     --font-sans: 'Outfit', sans-serif;
@@ -1140,8 +1141,15 @@ h4,
     }
 
     .hero-title {
-        font-size: 1.8rem;
+        font-size: 2.2rem; /* Increased for a more 'fun' and 'premium' feel */
+        line-height: 2.4;
         white-space: normal;
+        padding: 1.5rem 0;
+    }
+
+    .hero-translation {
+        font-size: 1.25rem;
+        line-height: 2.2;
     }
 
     .hero-buttons {
@@ -1234,15 +1242,18 @@ h4,
     }
 
     .hero-title {
-        font-size: 1.5rem;
+        font-size: 1.8rem; /* Slightly larger on very small screens */
+        line-height: 2.5;
     }
 
     .hero-ayat {
-        font-size: 1.25rem;
+        font-size: 1.4rem;
+        line-height: 2.5;
     }
 
     .hero-translation {
-        font-size: 1.1rem;
+        font-size: 1.15rem;
+        line-height: 2.3;
     }
 
     .section {
@@ -1274,11 +1285,21 @@ h4,
 
     .search-bar {
         padding: 0.8rem 3.5rem 0.8rem 6.5rem !important;
-        font-size: 1rem;
+        font-size: 1.1rem; /* Slightly larger for fun feel */
         height: auto;
-        min-height: 65px; /* More height to prevent dot clipping */
-        line-height: 2 !important; /* Increased for Nastaliq glyphs */
+        min-height: 70px; /* More height to prevent dot clipping */
+        line-height: 2.5 !important; /* Increased for Nastaliq glyphs */
         text-overflow: clip;
+    }
+
+    .fatwa-question {
+        font-size: 1.5rem; /* Larger for mobile impact */
+        line-height: 2;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        line-height: 2;
     }
 }
 
